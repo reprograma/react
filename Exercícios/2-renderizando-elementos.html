@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Renderizando elementos</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .boas-vindas {
+            text-align: center;
+            height: 100vh;
+            padding-top: 3rem;
+        }
+
+        .boas-vindas-nome {
+            color: #9351b4;
+        }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function formataNome(usuario) {
+            return usuario.primeiroNome + ' ' + usuario.ultimoNome;
+        }
+        
+        function BoasVindas(props) {
+            if (props.usuario) {
+                return (
+                    <h1 className="boas-vindas">
+                        Olá, <strong className="boas-vindas-nome">{formataNome(props.usuario)}</strong>
+                    </h1>
+                )
+            }
+
+            return <h1>Olá, Estranho.</h1>
+        }
+
+        const usuario = {
+            primeiroNome: 'Camila',
+            ultimoNome: 'Belo'
+        };
+
+        ReactDOM.render(
+            <BoasVindas usuario={usuario} />,
+            document.getElementById('root')
+        );
+    </script>
+  </body>
+</html>

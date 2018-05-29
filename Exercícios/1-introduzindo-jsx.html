@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Introduzindo JSX</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .nome {
+            color: #9351b4;
+        }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const usuario = {
+            primeiroNome: "Camila",
+            segundoNome: "Belo"
+        }
+
+        function formataNome(usuario) {
+            return usuario.primeiroNome + ' ' + usuario.segundoNome
+        }
+        
+        function BoasVindas(props) {
+            if (props.usuario) {
+                return (
+                    <h1>
+                        Olá, <strong className="nome">{formataNome(props.usuario)}</strong>!
+                    </h1>
+                )
+            }
+            return <h1>Olá, Estranho.</h1>;
+        }
+            
+        ReactDOM.render(
+            <BoasVindas usuario={usuario} />,
+            document.getElementById('root')
+        );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Componentes e Propriedades</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .avatar {
+            float: left;
+            height: 100px;
+            width: 100px;
+            margin-right: 1rem;
+            border-radius: 100%;
+        }
+
+        .usuario-info-name {
+            color: #9351b4;
+            font-size: 1.5rem;
+            padding-top: 1rem;
+        }
+
+        .comentario {
+            font-size: 1.2rem;
+            line-height: 1.5rem;
+            max-width: 40%;
+            margin: 3rem auto 0;
+        }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function formataData(date) {
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        const data = new Date()
+        const texto = 'Eu espero que esteja se divertindo aprendendo React!'
+        const autor = {
+            nome: 'Reprograma',
+            url: 'https://pbs.twimg.com/profile_images/784516442813243392/uOXmGCOW_400x400.jpg'
+        }
+
+        function Avatar(props) {
+            return (
+                <img
+                    className="avatar"
+                    src={props.usuario.url}
+                    alt={props.usuario.nome}
+                />
+            )
+        }
+
+        function UsuarioInfo(props) {
+            return (
+                <div className="usuario-info">
+                    <Avatar usuario={props.usuario} />
+                    
+                    <div className="usuario-info-name">
+                        {props.usuario.nome}
+                    </div>
+                </div>
+            )
+        }
+
+        function Comentario(props) {
+            return (
+                <div className="comentario">
+                    <UsuarioInfo usuario={props.autor} />
+
+                    <div className="comentario-texto">
+                        {props.texto}
+                    </div>
+                    <div className="comentario-data">
+                        {formataData(props.data)}
+                    </div>
+                </div>
+            );
+        }
+
+
+        ReactDOM.render(
+            <Comentario
+                data={data}
+                texto={texto}
+                autor={autor}
+            />,
+            document.getElementById('root')
+        );
+    </script>
+  </body>
+</html>
