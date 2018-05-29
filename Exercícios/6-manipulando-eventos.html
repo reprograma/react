@@ -42,11 +42,11 @@
         }
 
 
-        class Botaozinho extends React.Component {
+        class Toggle extends React.Component {
             constructor(props) {
                 super(props)
                 this.state = {
-                    texto: "Ativado"
+                    estaAtivado: true
                 }
 
                 console.log("this do construtor", this)
@@ -57,11 +57,23 @@
             handleClick(e) {
                 e.preventDefault()
 
-                if (this.state.texto === "Ativado") {
-                    this.setState({ texto: "Desativado" })
-                } else {
-                    this.setState({ texto: "Ativado" })
-                }
+                // const alteraEstado = prevState => {
+                //     if (prevState.texto === "Ativado") {
+                //         return { texto: "Desativado" };
+                //     } else {
+                //         return { texto: "Ativado" };
+                //     }
+                // }
+
+                // this.setState(alteraEstado)
+
+                this.setState(prevState => {
+                    if (prevState.texto === "Ativado") {
+                        return { texto: "Desativado" };
+                    } else {
+                        return { texto: "Ativado" };
+                    }
+                })
                 
                 console.log("this dentro do handleClick", this)
             }
@@ -69,7 +81,11 @@
             render() {
                 return (
                     <a href="#" onClick={this.handleClick}>
-                        {this.state.texto}
+                        {this.state.estaAtivado ? (
+                            <strong>Ativado</strong>
+                        ) : (
+                            <strong>Desativado</strong>
+                        )}
                     </a>
                 )
             }
@@ -77,7 +93,7 @@
         
 
         ReactDOM.render(
-            <Botaozinho />,
+            <Toggle />,
             document.getElementById('root')
         );
     </script>

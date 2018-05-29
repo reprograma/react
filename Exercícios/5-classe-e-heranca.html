@@ -1,46 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head><!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="UTF-8" />
-            <title>Manipulando eventos</title>
-            <style>
-                * {
-                    font-family: Arial, Helvetica, sans-serif
-                }
-        
-                .relogio {
-                    text-align: center;
-                    height: 100vh;
-                    padding-top: 3rem;
-                }
-        
-                .relogio-data {
-                    color: #9351b4;
-                    font-size: 5rem;
-                    margin: 1rem 0 0;
-                }
-            </style>
-            <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-            <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-            <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-          </head>
-          <body>
-            <div id="root"></div>
-        
-            <script type="text/babel">
-                
-
-
-        
-                ReactDOM.render(
-                    <Relogio />,
-                    document.getElementById('root')
-                );
-            </script>
-          </body>
-        </html>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -57,7 +17,6 @@
                 this.profissao = profissao
             }
         }
-
         document.write(`
             <pre>
                 class Pessoa {
@@ -68,11 +27,9 @@
                 }
             </pre>
         `)
-
         const camila = new Pessoa("Camila", "Frontend")
         const dani = new Pessoa("Dani", "Design e Front")
         const jani = new Pessoa("Jani", "Dev")
-
         document.write(`
             <pre>
                 const camila = new Pessoa("Camila", "Frontend")
@@ -90,8 +47,6 @@
                 ${JSON.stringify(jani)}
             </pre>
         `)
-
-
         class Animal {
             constructor(raca, peso){
                 this.raca = raca
@@ -99,19 +54,15 @@
                 this.vacinado = false
                 this.vermifugos = []
             }
-
             vacinar() {
                 this.vacinado = true
             }
-
             vermifugar(vermifugo) {
                 this.vermifugos.push(vermifugo)
             }
         }
-
         const maggie = new Animal("Shihtzu", 6)
         const hashi = new Animal("Viralata", 2)
-
         document.write(`
             <pre>
                 const maggie = new Animal("Shihtzu", 6)
@@ -124,16 +75,13 @@
                 ${JSON.stringify(hashi)}
             </pre>
         `)
-
         maggie.vacinar()
-
         document.write(`
             <pre>
                 maggie.vacinar()
                 ${JSON.stringify(maggie)}
             </pre>
         `)
-
         maggie.vermifugar("Canex")
         
         document.write(`
@@ -142,22 +90,18 @@
                 ${JSON.stringify(maggie)}
             </pre>
         `)
-
         class Ave extends Animal {
             constructor(raca, peso, porte) {
                 super(raca, peso)
                 this.porte = porte
             }
-
             vacinar() {
                 return "Não vacinamos aves..."
             }
-
             podarAsas() {
                 return "Podando as asas da ave..."
             }
         }
-
         document.write(`
             <pre>
                 class Ave extends Animal {
@@ -165,20 +109,16 @@
                         super(raca, peso)
                         this.porte = porte
                     }
-
                     vacinar() {
                         return "Não vacinamos aves..."
                     }
-
                     podarAsas() {
                         return "Podando as asas da ave..."
                     }
                 }
             </pre>
         `)
-
         const fifo = new Ave("Calopsita", 0.25, "pequeno")
-
         document.write(`
             <pre>
                 const fifo = new Ave("Calopsita", 0.25, "pequeno")
