@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Listas e Chaves</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .caixa-entrada {
+            margin-top: 3rem;
+        }
+
+        .notificacao {
+            font-size: 1.3rem;
+        }
+
+        .notificacao-destaque {
+            color: #9351b4;
+        }
+
+        .emails {
+            font-size: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .email {
+            padding: 1rem;
+            border-radius: 5px;
+            background: linear-gradient(to right, lightgray 50%, #9351b4);
+            box-shadow: 1px 1px 2px #9351b4;
+        }
+
+        .email + .email {
+            margin-top: 1rem;
+        }
+
+        @media(min-width: 768px) {
+            .caixa-entrada {
+                max-width: 60%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media(min-width: 992px) {
+            .caixa-entrada {
+                max-width: 50%;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function Email(props) {
+            return (
+                <li className="email">
+                    <h5>{props.mensagem.titulo}</h5>
+                    <p>{props.mensagem.texto}</p>
+                </li>
+            )
+        }
+
+
+        function CaixaEntrada(props) {
+            // const itens = [];
+            // for (let i = 0; i < props.mensagens.length; i++) {
+            //     itens.push(
+            //         <li>{props.mensagens[i]}</li>
+            //     )
+            // }
+
+            return (
+                <div className="caixa-entrada">
+                    <h1>Olá, {props.usuario}.</h1>
+                    
+                    {props.mensagens.length > 0 && (
+                        <p className="notificacao">
+                            Você tem 
+                            <strong className="notificacao-destaque"> {props.mensagens.length} </strong> 
+                            novas mensagens!
+                        </p>
+                    )} 
+                    
+                    <ul className="emails">
+                        {props.mensagens.map(mensagem => (
+                            <Email key={mensagem.id} mensagem={mensagem} />
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        const mensagens = [
+            {
+                id: '0b544879-9dc9-41a9-8a14-fef179d0239c',
+                titulo: 'Festa junina',
+                texto: `
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                `
+            }, 
+            {
+                id: 'e63fe9f6-e4d1-4f4f-9c53-2f371303baef',
+                titulo: 'Visita na IBM',
+                texto: `
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                `
+            },
+            {
+                id: '3639d8b3-aa33-4ab5-9fe8-ca9f1dbfdd43',
+                titulo: 'Formatura',
+                texto: `
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                `
+            }
+
+        ]
+
+        ReactDOM.render(
+            <CaixaEntrada usuario="Camila" mensagens={mensagens} />,
+            document.getElementById('root')
+        );
+    </script>
+  </body>
+</html>

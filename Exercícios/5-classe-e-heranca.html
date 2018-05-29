@@ -5,11 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Classe e Herança</title>
+        <style>
+            * {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
     </head>
     <body>
-        
-    </body>
-
     <script>
         class Pessoa {
             constructor(nome, profissao) {
@@ -17,6 +19,7 @@
                 this.profissao = profissao
             }
         }
+        
         document.write(`
             <pre>
                 class Pessoa {
@@ -27,26 +30,29 @@
                 }
             </pre>
         `)
-        const camila = new Pessoa("Camila", "Frontend")
-        const dani = new Pessoa("Dani", "Design e Front")
-        const jani = new Pessoa("Jani", "Dev")
+        
+        const camila = new Pessoa('Camila', 'Frontend')
+        const dani = new Pessoa('Dani', 'Design e Front')
+        const jani = new Pessoa('Jani', 'Dev')
+        
         document.write(`
             <pre>
-                const camila = new Pessoa("Camila", "Frontend")
+                const camila = new Pessoa('Camila', 'Frontend')
                 console.log(camila)
                 ${JSON.stringify(camila)}
             </pre>
             <pre>
-                const dani = new Pessoa("Dani", "Design e Front")
+                const dani = new Pessoa('Dani', 'Design e Front')
                 console.log(dani)
                 ${JSON.stringify(dani)}
             </pre>
             <pre>
-                const jani = new Pessoa("Jani", "Dev")
+                const jani = new Pessoa('Jani', 'Dev')
                 console.log(jani)
                 ${JSON.stringify(jani)}
             </pre>
         `)
+        
         class Animal {
             constructor(raca, peso){
                 this.raca = raca
@@ -61,47 +67,73 @@
                 this.vermifugos.push(vermifugo)
             }
         }
-        const maggie = new Animal("Shihtzu", 6)
-        const hashi = new Animal("Viralata", 2)
+
         document.write(`
             <pre>
-                const maggie = new Animal("Shihtzu", 6)
+                class Animal {
+                    constructor(raca, peso){
+                        this.raca = raca
+                        this.peso = peso
+                        this.vacinado = false
+                        this.vermifugos = []
+                    }
+                    vacinar() {
+                        this.vacinado = true
+                    }
+                    vermifugar(vermifugo) {
+                        this.vermifugos.push(vermifugo)
+                    }
+                }
+            </pre>
+        `)
+        
+        const maggie = new Animal('Shihtzu', 6)
+        const hashi = new Animal('Viralata', 2)
+        
+        document.write(`
+            <pre>
+                const maggie = new Animal('Shihtzu', 6)
                 console.log(maggie)<br>
                 ${JSON.stringify(maggie)}
             </pre>
             <pre>
-                const hashi = new Animal("Viralata", 2)
+                const hashi = new Animal('Viralata', 2)
                 console.log(hashi)<br>
                 ${JSON.stringify(hashi)}
             </pre>
         `)
+
         maggie.vacinar()
+        
         document.write(`
             <pre>
                 maggie.vacinar()
                 ${JSON.stringify(maggie)}
             </pre>
         `)
-        maggie.vermifugar("Canex")
+        
+        maggie.vermifugar('Canex')
         
         document.write(`
             <pre>
-                maggie.vermifugar()
+                maggie.vermifugar('Canex')
                 ${JSON.stringify(maggie)}
             </pre>
         `)
+
         class Ave extends Animal {
             constructor(raca, peso, porte) {
                 super(raca, peso)
                 this.porte = porte
             }
             vacinar() {
-                return "Não vacinamos aves..."
+                return 'Não vacinamos aves...'
             }
             podarAsas() {
-                return "Podando as asas da ave..."
+                return 'Podando as asas da ave...'
             }
         }
+
         document.write(`
             <pre>
                 class Ave extends Animal {
@@ -110,18 +142,20 @@
                         this.porte = porte
                     }
                     vacinar() {
-                        return "Não vacinamos aves..."
+                        return 'Não vacinamos aves...'
                     }
                     podarAsas() {
-                        return "Podando as asas da ave..."
+                        return 'Podando as asas da ave...'
                     }
                 }
             </pre>
         `)
-        const fifo = new Ave("Calopsita", 0.25, "pequeno")
+
+        const fifo = new Ave('Calopsita', 0.25, 'pequeno')
+        
         document.write(`
             <pre>
-                const fifo = new Ave("Calopsita", 0.25, "pequeno")
+                const fifo = new Ave('Calopsita', 0.25, 'pequeno')
                 console.log(fifo)
                 ${JSON.stringify(fifo)}
             </pre>
@@ -135,4 +169,5 @@
             </pre>
         `)
     </script>
+    </body>
 </html>

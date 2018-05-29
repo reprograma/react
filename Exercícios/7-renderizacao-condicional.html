@@ -7,18 +7,6 @@
         * {
             font-family: Arial, Helvetica, sans-serif
         }
-
-        .relogio {
-            text-align: center;
-            height: 100vh;
-            padding-top: 3rem;
-        }
-
-        .relogio-data {
-            color: #9351b4;
-            font-size: 5rem;
-            margin: 1rem 0 0;
-        }
     </style>
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -38,15 +26,6 @@
                 this.fazerLogin = this.fazerLogin.bind(this)
             }
 
-            handleClick(e) {
-                this.setState(prevState => {
-                    if (prevState.usuarioLogado) {
-                        return { usuarioLogado: false }
-                    } else {
-                        return { usuarioLogado: true }
-                    }
-                })
-            }
 
             fazerLogin(e) {
                 e.preventDefault()
@@ -63,81 +42,20 @@
             render() {
                 return this.state.usuarioLogado ? (
                     <div>
-                        <h1>Seja bemvinda de volta {this.props.apelido}</h1>
-                        <button onClick={this.handleClick}>Sair</button>
+                        <h1>Bemvinda de volta {this.props.apelido}</h1>
+                        <button onClick={this.fazerLogout}>Sair</button>
                     </div>
                 ) : (
-                    <div className="pagina-deslogado">
+                    <div>
                         <h1>Por favor faça login</h1>
-                        <button className="botao" onClick={this.handleClick}>Entrar</button>
+                        <button onClick={this.fazerLogin}>Entrar</button>
                     </div>
                 )
             }
         }
 
-
-        function Email(props) {
-            return (
-                <li>
-                    <h5>{props.mensagem.titulo}</h5>
-                    <p>{props.mensagem.texto}</p>
-                </li>
-            )
-        }
-
-
-        function CaixaEntrada(props) {
-            // const itens = [];
-
-            // for (let i = 0; i < props.mensagens.length; i++) {
-            //     itens.push(
-            //         <li>{props.mensagens[i]}</li>
-            //     )
-            // }
-
-            
-
-            return (
-                <div>
-                    <h1>Olá</h1>
-                    {props.mensagens.length > 0 && (
-                        <p>Você tem {props.mensagens.length} mensagens!</p>
-                    )} 
-                    <ul>
-                        {props.mensagens.map(mensagem => (
-                            <Email key={mensagem.id} mensagem={mensagem} />
-                        ))}
-                    </ul>
-                </div>
-            )
-        }
-
-        const mensagens = [
-            {
-                id: "jldshfkjsdhfsjdkh22565",
-                titulo: "Festa junina",
-                texto: `
-                    Enviem seus emails bla bla bla
-                `
-            }, 
-            {
-                id: "jldshsdfsdfkjsdhfsjdkh2",
-                titulo: "Festa junina",
-                texto: `
-                    Enviem seus emails bla bla bla
-                `
-            },{
-                id: "aadshfkjsdhfsjdkh22565",
-                titulo: "Festa junina",
-                texto: `
-                    Enviem seus emails bla bla bla
-                `
-            }
-
-        ]
-
         ReactDOM.render(
-            <CaixaEntrada mensagens={mensagens} />,
+            <PaginaInicial apelido="Camila" />,
             document.getElementById('root')
         );
     </script>

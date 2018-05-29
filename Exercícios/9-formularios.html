@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulários</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .formulario-titulo {
+            text-align: center;
+        }
+
+        .formulario-legenda {
+            font-weight: bold;
+        }
+
+        .formulario-campo {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0 0 1rem;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        .formulario-botao {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            width: 100%;
+            padding: 0.8rem;
+            background: #9351b4;
+            border: 1px solid #9351b4;
+            border-radius: 5px;
+        }
+
+        @media(min-width: 768px) {
+            .formulario {
+                max-width: 50%;
+                margin: 3rem auto 0;
+            }
+        }
+
+        @media(min-width: 992px) {
+            .formulario {
+                max-width: 40%;
+            }
+        }
+
+        @media(min-width: 1280px) {
+            .formulario {
+                max-width: 30%;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class FormularioUsuario extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = { 
+                    nome: "",
+                    email: "",
+                    senha: ""
+                }
+                this.handleSubmit = this.handleSubmit.bind(this)
+                this.handleChange = this.handleChange.bind(this)
+            }
+
+            handleSubmit(e) {
+                e.preventDefault()
+                console.log("nome", this.state.nome)
+                console.log("email", this.state.email)
+                console.log("senha", this.state.senha)
+            }
+
+            handleChange(e) {
+                const nomeDoInput = e.target.name;
+
+                this.setState({ [nomeDoInput]: e.target.value })
+            }
+            
+            render() {
+                return (
+                    <form className="formulario" onSubmit={this.handleSubmit}>
+                        <h1 className="formulario-titulo">Formulário de usuário</h1>
+
+                        <label className="formulario-legenda">Nome:</label>
+                        <input className="formulario-campo" type="text" name="nome" onChange={this.handleChange} />
+
+                        <label className="formulario-legenda">Email:</label>
+                        <input className="formulario-campo" type="email" name="email" onChange={this.handleChange} />
+
+                        <label className="formulario-legenda">Senha:</label>
+                        <input className="formulario-campo" type="password" name="senha" onChange={this.handleChange} />
+
+                        <button className="formulario-botao">Enviar</button>
+                    </form>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <FormularioUsuario />,
+            document.getElementById('root')
+        );
+    </script>
+  </body>
+</html>
