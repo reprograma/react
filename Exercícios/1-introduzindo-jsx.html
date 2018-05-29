@@ -36,8 +36,33 @@
                         Olá, <strong className="nome">{formataNome(props.usuario)}</strong>!
                     </h1>
                 )
+
+                // JSX
+                return <h1>Hello, Stranger</h1>
             }
-            return <h1>Olá, Estranho.</h1>;
+
+
+            // O babel converteu JX para JavaScript
+            // return React.createElement(
+            //     'h1',
+            //     {className: "nome"},
+            //     React.createElement(
+            //         'strong',
+            //         null,
+            //         "Hello Stranger"
+            //     )
+            // );
+
+            // React manipula o DOM
+            // const h1 = document.createElement('h1')
+            // h1.setAttribute("class", "nome")
+            // h1.textContent = "Hello, Stranger"
+
+            // const root = document.getElementById("root")
+            // root.appendChild(h1);
+
+
+
         }
             
         ReactDOM.render(

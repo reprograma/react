@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Estado e Ciclo de vida</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .relogio {
+            text-align: center;
+            height: 100vh;
+            padding-top: 3rem;
+        }
+
+        .relogio-data {
+            color: #9351b4;
+            font-size: 5rem;
+            margin: 1rem 0 0;
+        }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function Link() {
+            function handleClick(e) {
+                e.preventDefault()
+                console.log("O botão foi clicado")
+            }
+
+            return (
+                <a href="#" onClick={handleClick}>
+                    Menu
+                </a>
+            )
+        }
+
+
+        class Botaozinho extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    texto: "Ativado"
+                }
+
+                console.log("this do construtor", this)
+
+                this.handleClick = this.handleClick.bind(this)
+            }
+
+            handleClick(e) {
+                e.preventDefault()
+
+                if (this.state.texto === "Ativado") {
+                    this.setState({ texto: "Desativado" })
+                } else {
+                    this.setState({ texto: "Ativado" })
+                }
+                
+                console.log("this dentro do handleClick", this)
+            }
+
+            render() {
+                return (
+                    <a href="#" onClick={this.handleClick}>
+                        {this.state.texto}
+                    </a>
+                )
+            }
+        }        
+        
+
+        ReactDOM.render(
+            <Botaozinho />,
+            document.getElementById('root')
+        );
+    </script>
+  </body>
+</html>

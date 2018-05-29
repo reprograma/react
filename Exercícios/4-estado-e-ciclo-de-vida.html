@@ -47,16 +47,18 @@
 
             componentWillUnmount() {
                 clearInterval(this.intervalo)
+                // chamar backend
+                // salva no banco de dados do navegador
             }
 
             render() {
                 return (
-                    <div className="relogio">
+                    <React.Fragment>
                         <h1>Horário no Brasil</h1>
                         <h2 className="relogio-data">
                             {this.state.data.toLocaleTimeString('pt-BR')}
                         </h2>
-                    </div>
+                    </React.Fragment>
                 )
             }
         }
