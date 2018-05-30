@@ -95,18 +95,30 @@
 
                 if (nomeDoInput === 'nome' && valorDoInput.trim() === '') {
                     this.setState({ erro: { tipo: "nome", mensagem: "Este campo é obrigatório" }})
-                } else {
-                    this.setState({ erro: null })
+                    return
                 }
 
                 if (nomeDoInput === 'nome' && valorDoInput.length < 10) {
                     this.setState({ erro: { tipo: "nome", mensagem: "Digite pelo menos 10 caracteres" }})
-                } else {
-                    this.setState({ erro: null })
+                    return
                 }
 
-                this.setState(
-                    {[nomeDoInput]: valorDoInput 
+                // if (nomeDoInput === 'senha' && valorDoInput.trim() === '') {
+                //     this.setState({ erro: { tipo: "senha", mensagem: "Este campo é obrigatório" }})
+                //     return
+                // }
+
+                // if (nomeDoInput === 'senha' && valorDoInput.length < 6) {
+                //     this.setState({ erro: { tipo: "senha", mensagem: "Digite pelo menos 6 caracteres" }})
+                //     return
+                // }
+
+
+
+
+                this.setState({
+                    [nomeDoInput]: valorDoInput,
+                    erro: null
                  })
             }
             
@@ -130,7 +142,7 @@
                         <label className="formulario-legenda">Senha:</label>
                         <input className="formulario-campo" type="password" name="senha" onChange={this.handleChange} />
                         {this.state.erro && this.state.erro.tipo === 'senha' && (
-                            <p className="erro">Digite no mínimo 6 caracteres</p>
+                            <p className="erro">{this.state.mensagem}</p>
                         )}
 
                         <button className="formulario-botao">Enviar</button>
