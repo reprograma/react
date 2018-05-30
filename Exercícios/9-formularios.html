@@ -37,6 +37,10 @@
             border-radius: 5px;
         }
 
+        .erro {
+            color: red;
+        }
+
         @media(min-width: 768px) {
             .formulario {
                 max-width: 50%;
@@ -70,7 +74,8 @@
                 this.state = { 
                     nome: "",
                     email: "",
-                    senha: ""
+                    senha: "",
+                    erro: null
                 }
                 this.handleSubmit = this.handleSubmit.bind(this)
                 this.handleChange = this.handleChange.bind(this)
@@ -78,6 +83,7 @@
 
             handleSubmit(e) {
                 e.preventDefault()
+    
                 console.log("nome", this.state.nome)
                 console.log("email", this.state.email)
                 console.log("senha", this.state.senha)
@@ -85,8 +91,23 @@
 
             handleChange(e) {
                 const nomeDoInput = e.target.name;
+                const valorDoInput = e.target.value;
 
-                this.setState({ [nomeDoInput]: e.target.value })
+                if (nomeDoInput === 'nome' && valorDoInput.trim() === '') {
+                    this.setState({ erro: { tipo: "nome", mensagem: "Este campo é obrigatório" }})
+                } else {
+                    this.setState({ erro: null })
+                }
+
+                if (nomeDoInput === 'nome' && valorDoInput.length < 10) {
+                    this.setState({ erro: { tipo: "nome", mensagem: "Digite pelo menos 10 caracteres" }})
+                } else {
+                    this.setState({ erro: null })
+                }
+
+                this.setState(
+                    {[nomeDoInput]: valorDoInput 
+                 })
             }
             
             render() {
@@ -96,12 +117,21 @@
 
                         <label className="formulario-legenda">Nome:</label>
                         <input className="formulario-campo" type="text" name="nome" onChange={this.handleChange} />
+                        {this.state.erro && this.state.erro.tipo === 'nome' && (
+                            <p className="erro">{this.state.erro.mensagem}</p>
+                        )}
 
                         <label className="formulario-legenda">Email:</label>
                         <input className="formulario-campo" type="email" name="email" onChange={this.handleChange} />
+                        {this.state.erro && this.state.erro.tipo === 'email' && (
+                            <p className="erro">Este email é inválido</p>
+                        )}
 
                         <label className="formulario-legenda">Senha:</label>
                         <input className="formulario-campo" type="password" name="senha" onChange={this.handleChange} />
+                        {this.state.erro && this.state.erro.tipo === 'senha' && (
+                            <p className="erro">Digite no mínimo 6 caracteres</p>
+                        )}
 
                         <button className="formulario-botao">Enviar</button>
                     </form>
