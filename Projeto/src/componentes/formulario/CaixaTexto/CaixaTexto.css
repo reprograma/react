@@ -1,0 +1,16 @@
+.caixa-texto {
+    font-size: 1rem;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0 0 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.caixa-texto:focus {
+    outline: none;
+    border-color: #9351b4;
+    box-shadow: 0 0 10px #9351b4;
+}

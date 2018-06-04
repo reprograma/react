@@ -1,0 +1,17 @@
+.botao {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    background: #9351b4;
+    border: 1px solid #9351b4;
+    border-radius: 5px;
+}
+
+.botao--desabilitado {
+    color: gray;
+    background: lightgrey;
+    border-color: lightgrey;
+}
