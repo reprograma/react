@@ -9,7 +9,8 @@
     border-radius: 5px;
 }
 
-.botao-vermelho {
-    border-color: red;
-    background: red;
+.botao--desabilitado {
+    color: gray;
+    background: lightgrey;
+    border-color: lightgrey;
 }

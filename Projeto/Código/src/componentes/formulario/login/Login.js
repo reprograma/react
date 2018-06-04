@@ -1,4 +1,8 @@
 import React from 'react'
+import Botao from '../Botao/Botao'
+import Link from '../Link/Link'
+import Grupo from '../Grupo/Grupo'
+import FaBeer from 'react-icons/lib/fa/beer';
 import './Login.css'
 
 
@@ -15,6 +19,7 @@ class FormularioLogin extends React.Component {
         
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     handleSubmit(e) {
@@ -72,31 +77,52 @@ class FormularioLogin extends React.Component {
             erro: null
         })
     }
+
+    handleClick(e) {
+        e.preventDefault()
+        console.log('Foi clicado no link criar uma conta')
+    }
+
+    estaDesabilitado() {
+        return !this.state.nome||
+               !this.state.email ||
+               !this.state.senha
+    }
     
     render() {
         return (
             <form className="formulario" onSubmit={this.handleSubmit}>
-                <h1 className="formulario-titulo">Formulário de usuário</h1>
+                <h1 className="formulario-titulo">
+                    Formulário de usuário <FaBeer />
+                </h1>
 
-                <label className="formulario-legenda">Nome:</label>
-                <input className="formulario-campo" type="text" name="nome" onChange={this.handleChange} />
-                {this.state.erro && this.state.erro.tipo === 'nome' && (
-                    <p className="erro">{this.state.erro.mensagem}</p>
-                )}
+                <Grupo erro={this.state.email.erro}>
+                    <Grupo.Legenda htmlFor="email">Email:</Grupo.Legenda>
+                    <Grupo.CaixaTexto 
+                        id="email" 
+                        name="email" 
+                        type="email" 
+                        placeholder="Email"
+                        onChange={this.handleChange} />
+                </Grupo>
 
-                <label className="formulario-legenda">Email:</label>
-                <input className="formulario-campo" type="email" name="email" onChange={this.handleChange} />
-                {this.state.erro && this.state.erro.tipo === 'email' && (
-                    <p className="erro">Este email é inválido</p>
-                )}
+                <Grupo erro={this.state.senha.erro}>
+                    <Grupo.Legenda htmlFor="senha">Senha:</Grupo.Legenda>
+                    <Grupo.CaixaTexto 
+                        id="senha" 
+                        name="senha" 
+                        type="password" 
+                        placeholder="senha"
+                        onChange={this.handleChange} />
+                </Grupo>
 
-                <label className="formulario-legenda">Senha:</label>
-                <input className="formulario-campo" type="password" name="senha" onChange={this.handleChange} />
-                {this.state.erro && this.state.erro.tipo === 'senha' && (
-                    <p className="erro">{this.state.mensagem}</p>
-                )}
+                <Botao desabilitado={this.estaDesabilitado()}>
+                    Enviar
+                </Botao>
 
-                <button className="formulario-botao">Enviar</button>
+                <Link onLinkClick={this.handleClick}>
+                    Criar uma conta
+                </Link>
             </form>
         )
     }

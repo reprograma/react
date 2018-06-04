@@ -3,8 +3,14 @@ import './Botao.css'
 
 
 function Botao(props) {
+    let classes = 'botao'
+
+    if (props.desabilitado) {
+        classes += ' botao--desabilitado'
+    }
+
     return (
-        <button className={`botao ${props.cor === 'vermelho' ? 'botao-vermelho' : ''}`}>
+        <button className={classes}>
             {props.children}
         </button>
     );

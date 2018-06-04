@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from './componentes/navbar/Navbar'
-import FormularioLogin from './componentes/formulario/login/Login'
-// import Botao from './componentes/formulario/botao/Botao'
+import Login from './paginas/Login/Login'
 import './App.css'
 
 
@@ -33,11 +32,7 @@ class App extends React.Component {
           deslogaUsuario={this.deslogaUsuario}
         />
 
-        <FormularioLogin />
-
-        {/* <Botao>
-          Botao dentro do app
-        </Botao> */}
+        <Login />
       </div>
     );
   }
