@@ -1,12 +1,13 @@
 import React from 'react'
+import { Link as LinkRouter } from 'react-router-dom'
 import './Link.css'
 
 
 function Link(props) {
     return (
-        <a className="link" onClick={props.onLinkClick}>
+        <LinkRouter className="link" to={props.to}>
             {props.children}
-        </a>
+        </LinkRouter>
     )
 }
 

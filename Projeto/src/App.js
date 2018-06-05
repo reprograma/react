@@ -1,6 +1,9 @@
 import React from 'react'
 import Navbar from './componentes/Navbar/Navbar'
 import Login from './paginas/Login/Login'
+import Conta from './paginas/Conta/Conta'
+import NaoEncontrada from './paginas/NaoEncontrada/NaoEncotrada'
+import { Route, Switch } from 'react-router-dom'
 import './App.css'
 
 
@@ -26,13 +29,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar 
-          usuario={this.state.usuario} 
-          logaUsuario={this.logaUsuario} 
-          deslogaUsuario={this.deslogaUsuario}
-        />
+        <Navbar usuario={this.state.usuario} logaUsuario={this.logaUsuario} deslogaUsuario={this.deslogaUsuario} />
 
-        <Login />
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/login" component={Login} />
+          <Route path="/conta" component={Conta} />
+          <Route component={NaoEncontrada} />
+        </Switch>
       </div>
     );
   }

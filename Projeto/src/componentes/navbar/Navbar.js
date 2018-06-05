@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from './logo.png'
+import { Link } from 'react-router-dom'
 import './Navbar.css'
 
 
@@ -20,15 +21,15 @@ function Navbar(props) {
 
             <ul className="navbar-links">
                 <li>
-                    <a>Quem somos</a>
+                    <Link to="/quem-somos">Quem somos</Link>
                 </li>
                 <li>
-                    <a>Contato</a>
+                    <Link to="/contato">Contato</Link>
                 </li>
                 <li>
-                    <a onClick={handleClick}>
+                    <Link to={props.usuario ? '/login' : '/home'} onClick={handleClick}>
                         {props.usuario ? 'Sair' : 'Login'}
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </nav>

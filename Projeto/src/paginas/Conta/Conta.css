@@ -1,0 +1,15 @@
+.conta {
+    padding: 0.75rem 1rem 0;
+}
+
+@media (min-width: 768px) {
+    .conta {
+        padding: 1.5rem 20% 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .conta {
+        padding: 2.25rem 30% 0;
+    }
+}

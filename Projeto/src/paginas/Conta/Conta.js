@@ -3,14 +3,22 @@ import Formulario from '../../componentes/Formulario/Formulario'
 import Grupo from '../../componentes/Formulario/Grupo/Grupo'
 import Botao from '../../componentes/Formulario/Botao/Botao'
 import Link from '../../componentes/Formulario/Link/Link'
-import './Login.css'
+import './Conta.css'
 
 
-class Login extends React.Component {
+class Conta extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
+            nome: {
+                valor: '',
+                erro: ''
+            },
+            telefone: {
+                valor: '',
+                erro: ''
+            },
             email: {
                 valor: '',
                 erro: ''
@@ -26,6 +34,8 @@ class Login extends React.Component {
         e.preventDefault()
 
         const usuario = {
+            nome: this.state.nome.valor,
+            telefone: this.state.telefone.valor,
             email: this.state.email.valor,
             senha: this.state.senha.valor
         }
@@ -53,7 +63,11 @@ class Login extends React.Component {
     }
 
     deveDesabilitaFormulario() {
-        return !this.state.email.valor ||
+        return !this.state.nome.valor ||
+                this.state.nome.erro ||
+               !this.state.telefone.valor ||
+                this.state.telefone.erro ||
+               !this.state.email.valor ||
                 this.state.email.erro ||
                !this.state.senha.valor ||
                 this.state.senha.erro
@@ -63,12 +77,41 @@ class Login extends React.Component {
         const estaDesabilitado = this.deveDesabilitaFormulario()
 
         return (
-            <div className="login">
+            <div className="conta">
                 <Formulario 
-                    titulo="Login" 
-                    texto="Entre com seu email e senha."
+                    titulo="Conta" 
+                    texto="Envie o formulário para criar uma conta!"
                     onSubmit={this.handleSubmit}
                 >
+                    <Grupo erro={this.state.nome.erro}>
+                        <Grupo.Legenda htmlFor="nome">
+                            Nome:
+                        </Grupo.Legenda>
+                        <Grupo.CaixaTexto 
+                            id="nome" 
+                            name="nome" 
+                            type="text" 
+                            placeholder="Nome"
+                            required={true}
+                            minLength={10}
+                            onChange={this.handleChange} 
+                        />
+                    </Grupo>
+
+                    <Grupo erro={this.state.telefone.erro}>
+                        <Grupo.Legenda htmlFor="telefone">
+                            Telefone:
+                        </Grupo.Legenda>
+                        <Grupo.CaixaTexto 
+                            id="telefone" 
+                            name="telefone" 
+                            type="text" 
+                            placeholder="Telefone"
+                            required={true}
+                            onChange={this.handleChange} 
+                        />
+                    </Grupo>
+
                     <Grupo erro={this.state.email.erro}>
                         <Grupo.Legenda htmlFor="email">
                             Email:
@@ -102,8 +145,8 @@ class Login extends React.Component {
                         Enviar
                     </Botao>
 
-                    <Link to="/conta">
-                        Criar uma conta
+                    <Link to="/login">
+                        Fazer login
                     </Link>
                 </Formulario>
             </div>
@@ -111,4 +154,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default Conta
