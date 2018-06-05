@@ -20,11 +20,26 @@ class Login extends React.Component {
                 erro: ''
             }
         }
-
-        this.handleChange = this.handleChange.bind(this)
     }
 
-    handleChange(nomeDoInput, valorDoInput, erro = ''){
+    handleSubmit = (e) => {
+        e.preventDefault()
+
+        const usuario = {
+            email: this.state.email.valor,
+            senha: this.state.senha.valor
+        }
+
+        const estaDesabilitado = this.deveDesabilitaFormulario()
+
+        if (!estaDesabilitado) {
+            // TODO: enviar dados para a API
+            console.log("usuario", usuario)
+        }
+        
+    }
+
+    handleChange = (nomeDoInput, valorDoInput, erro = '') => {
         // console.log('nomeDoInput: ', nomeDoInput)
         // console.log('valorDoInput: ', valorDoInput)
         // console.log('erro: ', erro)
@@ -37,11 +52,24 @@ class Login extends React.Component {
         })
     }
 
+    deveDesabilitaFormulario() {
+        return !this.state.email.valor ||
+                this.state.email.erro ||
+               !this.state.senha.valor ||
+                this.state.senha.erro
+    }
+
 
     render() {
+        const desabilitado = this.deveDesabilitaFormulario()
+
         return (
             <div className="login">
-                <Formulario titulo="Login" texto="Entre com seu email e senha.">
+                <Formulario 
+                    titulo="Login" 
+                    texto="Entre com seu email e senha."
+                    onSubmit={this.handleSubmit}
+                >
                     <Grupo erro={this.state.email.erro}>
                         <Grupo.Legenda htmlFor="email">
                             Email:
@@ -71,7 +99,7 @@ class Login extends React.Component {
                         />
                     </Grupo>
 
-                    <Botao desabilitado={false}>
+                    <Botao desabilitado={desabilitado}>
                         Enviar
                     </Botao>
 
