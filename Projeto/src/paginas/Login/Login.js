@@ -1,46 +1,83 @@
 import React from 'react'
 import Formulario from '../../componentes/Formulario/Formulario'
+import Grupo from '../../componentes/Formulario/Grupo/Grupo'
+import Botao from '../../componentes/Formulario/Botao/Botao'
+import Link from '../../componentes/Formulario/Link/Link'
 import './Login.css'
 
 
 class Login extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            email: {
+                valor: '',
+                erro: ''
+            },
+            senha: {
+                valor: '',
+                erro: ''
+            }
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(nomeDoInput, valorDoInput, erro = ''){
+        // console.log('nomeDoInput: ', nomeDoInput)
+        // console.log('valorDoInput: ', valorDoInput)
+        // console.log('erro: ', erro)
+
+        this.setState({
+            [nomeDoInput]: {
+                valor: valorDoInput,
+                erro: erro
+            }
+        })
+    }
+
+
     render() {
         return (
             <div className="login">
                 <Formulario titulo="Login" texto="Entre com seu email e senha.">
-                    <Formulario.Grupo>
-                        <Formulario.Grupo.Legenda htmlFor="email">
+                    <Grupo erro={this.state.email.erro}>
+                        <Grupo.Legenda htmlFor="email">
                             Email:
-                        </Formulario.Grupo.Legenda>
-                        <Formulario.Grupo.CaixaTexto 
+                        </Grupo.Legenda>
+                        <Grupo.CaixaTexto 
                             id="email" 
                             name="email" 
                             type="email" 
                             placeholder="Email"
+                            required={true}
                             onChange={this.handleChange} 
                         />
-                    </Formulario.Grupo>
+                    </Grupo>
 
-                    <Formulario.Grupo>
-                        <Formulario.Grupo.Legenda htmlFor="senha">
+                    <Grupo erro={this.state.senha.erro}>
+                        <Grupo.Legenda htmlFor="senha">
                             Senha:
-                        </Formulario.Grupo.Legenda>
-                        <Formulario.Grupo.CaixaTexto 
+                        </Grupo.Legenda>
+                        <Grupo.CaixaTexto 
                             id="senha" 
                             name="senha" 
                             type="password" 
-                            placeholder="senha"
+                            placeholder="Senha"
+                            minLength={6}
+                            required={true}
                             onChange={this.handleChange} 
                         />
-                    </Formulario.Grupo>
+                    </Grupo>
 
-                    <Formulario.Botao desabilitado>
+                    <Botao desabilitado={false}>
                         Enviar
-                    </Formulario.Botao>
+                    </Botao>
 
-                    <Formulario.Link onLinkClick>
+                    <Link onLinkClick={()=> {}}>
                         Criar uma conta
-                    </Formulario.Link>
+                    </Link>
                 </Formulario>
             </div>
         )
