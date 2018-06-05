@@ -18,7 +18,7 @@ function CaixaTexto(props) {
         }
 
         if (props.minLength && valor.length < props.minLength) {
-            props.onChange(nome, valor, `Digite pelo menos ${props.minLength} caracter`)
+            props.onChange(nome, valor, `Digite pelo menos ${props.minLength} caracteres`)
             return 
         }
         

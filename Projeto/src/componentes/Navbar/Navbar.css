@@ -4,7 +4,7 @@
     justify-content: space-between;
     flex: 0 60px;
     min-height: 60px;
-    padding: 0 calc(10% + 1rem);
+    padding: 0 10%;
     background: #ffffff;
     border-bottom: 1px solid #d4dadf;
     box-shadow: 0 1px 1px 0 #f0f1f4;
@@ -17,7 +17,6 @@
 
 .navbar-links {
     list-style: none;
-    color: #9351b4;
     display: flex;
     align-items: center;
     padding: 0;
@@ -25,4 +24,15 @@
 
 .navbar-links li + li {
     margin-left: 1rem;
+}
+
+.navbar-links a {
+    color: #9351b4;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-bottom: 0.3rem;
+}
+
+.navbar-links__ativo {
+    border-bottom: 2px solid #9351b4;
 }

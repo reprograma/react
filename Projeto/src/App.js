@@ -2,7 +2,9 @@ import React from 'react'
 import Navbar from './componentes/Navbar/Navbar'
 import Login from './paginas/Login/Login'
 import Conta from './paginas/Conta/Conta'
-import NaoEncontrada from './paginas/NaoEncontrada/NaoEncotrada'
+import Contato from './paginas/Contato/Contato'
+import QuemSomos from './paginas/QuemSomos/QuemSomos'
+import NaoEncontrada from './paginas/NaoEncontrada/NaoEncontrada'
 import { Route, Switch } from 'react-router-dom'
 import './App.css'
 
@@ -29,12 +31,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar usuario={this.state.usuario} logaUsuario={this.logaUsuario} deslogaUsuario={this.deslogaUsuario} />
+        <Navbar 
+          usuario={this.state.usuario}
+          logaUsuario={this.logaUsuario}
+          deslogaUsuario={this.deslogaUsuario} />
 
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/conta" component={Conta} />
+          <Route path="/contato" component={Contato} />
+          <Route path="/quem-somos" component={QuemSomos} />
           <Route component={NaoEncontrada} />
         </Switch>
       </div>

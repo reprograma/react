@@ -1,0 +1,10 @@
+.contato {
+    padding: 3rem 1rem 0;
+}
+
+@media (min-width: 992px) {
+    .contato {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
