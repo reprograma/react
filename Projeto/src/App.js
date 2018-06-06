@@ -9,14 +9,15 @@ import NaoEncontrada from './paginas/NaoEncontrada/NaoEncontrada'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css'
 
-/* <Route exact path="/" render={props => {
+/* 
+<Route exact path="/" render={props => {
   if (this.state.usuario) {
     return <Home />
   } else {
     return <Redirect to="/login" />
   }
-}} /> */
-// O app é como se fosse o body do HTML
+}} />
+*/
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -37,7 +38,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Navbar 
           usuario={this.state.usuario}
           onSairClick={this.deslogaUsuario}

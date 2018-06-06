@@ -2,7 +2,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './Menu.css'
 
+
 // const props = {
+//     usuario: true,
 //     onSairClick: () => {}
 // }
 
@@ -22,19 +24,27 @@ class Menu extends React.Component {
         })
     }
 
+    handleOpcaoClick = e => {
+        if (this.state.aberto) {
+            this.handleAbreOuFecha()
+        }
+    }
+
     handleLoginOuSair = e => {
         if (this.props.usuario) {
             this.props.onSairClick()
         }
+
+        this.handleOpcaoClick()
     }
 
     render() {
         let classesDoBotao = 'navbar-menu__botao'
-        let classesDosOpcoes = 'navbar-menu__opcoes'
+        let classesDasOpcoes = 'navbar-menu__opcoes'
 
         if (this.state.aberto) {
             classesDoBotao += ' navbar-menu__botao--aberto'
-            classesDosOpcoes += ' navbar-menu__opcoes--aberto'
+            classesDasOpcoes += ' navbar-menu__opcoes--aberto'
         }
 
         return (
@@ -43,21 +53,29 @@ class Menu extends React.Component {
                     Menu
                 </a>
 
-                <ul className={classesDosOpcoes}>
+                <ul className={classesDasOpcoes}>
                     <li>
-                        <NavLink to="/quem-somos" activeClassName="navbar-links__ativo">
+                        <NavLink 
+                            to="/quem-somos" 
+                            activeClassName="navbar-menu__opcoes--ativo"
+                            onClick={this.handleOpcaoClick}
+                        >
                             Quem somos
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/contato" activeClassName="navbar-links__ativo">
+                        <NavLink 
+                            to="/contato" 
+                            activeClassName="navbar-menu__opcoes--ativo"
+                            onClick={this.handleOpcaoClick}        
+                        >
                             Contato
                         </NavLink>
                     </li>
                     <li>
                         <NavLink 
                             to="/login" 
-                            activeClassName="navbar-links__ativo"
+                            activeClassName="navbar-menu__opcoes--ativo"
                             onClick={this.handleLoginOuSair}
                         >
                             {this.props.usuario ? 'Sair' : 'Login'}

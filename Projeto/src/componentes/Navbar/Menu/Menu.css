@@ -37,12 +37,19 @@
     transform: translateX(0);
 }
 
-.navbar-menu__opcoes li {
-    cursor: pointer;
+.navbar-menu__opcoes--ativo {
+    border-bottom: 2px solid white;
 }
 
 .navbar-menu__opcoes li + li {
     margin-top: 1rem;
+}
+
+.navbar-menu__opcoes li a {
+    cursor: pointer;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
 @media (min-width: 992px) {
@@ -67,7 +74,7 @@
     }
 
     .navbar-menu__opcoes--ativo {
-        border-bottom: 2px solid #9351b4;
+        border-color: #9351b4;
     }
 
     .navbar-menu__opcoes li + li {
@@ -77,8 +84,6 @@
 
     .navbar-menu__opcoes li a {
         color: #9351b4;
-        text-transform: uppercase;
-        text-decoration: none;
         padding: 0.3rem 0;
     }
 }
