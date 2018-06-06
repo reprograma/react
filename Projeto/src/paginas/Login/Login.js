@@ -30,7 +30,7 @@ class Login extends React.Component {
             senha: this.state.senha.valor
         }
 
-        const estaDesabilitado = this.deveDesabilitaFormulario()
+        const estaDesabilitado = this.estaDesabilitado()
 
         if (!estaDesabilitado) {
             // TODO: enviar dados para a API
@@ -52,7 +52,7 @@ class Login extends React.Component {
         })
     }
 
-    deveDesabilitaFormulario() {
+    estaDesabilitado() {
         return !this.state.email.valor ||
                 this.state.email.erro ||
                !this.state.senha.valor ||
@@ -60,7 +60,7 @@ class Login extends React.Component {
     }
 
     render() {
-        const estaDesabilitado = this.deveDesabilitaFormulario()
+        const estaDesabilitado = this.estaDesabilitado()
 
         return (
             <div className="login">

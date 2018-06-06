@@ -40,7 +40,7 @@ class Conta extends React.Component {
             senha: this.state.senha.valor
         }
 
-        const estaDesabilitado = this.deveDesabilitaFormulario()
+        const estaDesabilitado = this.estaDesabilitado()
 
         if (!estaDesabilitado) {
             // TODO: enviar dados para a API
@@ -62,7 +62,7 @@ class Conta extends React.Component {
         })
     }
 
-    deveDesabilitaFormulario() {
+    estaDesabilitado() {
         return !this.state.nome.valor ||
                 this.state.nome.erro ||
                !this.state.telefone.valor ||
@@ -74,7 +74,7 @@ class Conta extends React.Component {
     }
 
     render() {
-        const estaDesabilitado = this.deveDesabilitaFormulario()
+        const estaDesabilitado = this.estaDesabilitado()
 
         return (
             <div className="conta">
