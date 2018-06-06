@@ -1,35 +1,45 @@
 import React from 'react'
 import logo from './logo.png'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './Navbar.css'
 
+// const props = {
+//     usuario: {usuario: true},
+//     onSairClick: () => {}
+// }
 
 function Navbar(props) {
-    function handleClick(e) {
-        e.preventDefault()
-
+    function handleLoginOuSair() {
         if (props.usuario) {
-            props.deslogaUsuario();
-        } else {
-            props.logaUsuario();
+            props.onSairClick()
         }
     }
 
     return (
         <nav className="navbar">
-            <img className="navbar-logo" src={logo} alt="Logo" />
+            <Link to="/">
+                <img className="navbar-logo" src={logo} alt="Logo" />
+            </Link>
 
             <ul className="navbar-links">
                 <li>
-                    <Link to="/quem-somos">Quem somos</Link>
+                    <NavLink to="/quem-somos" activeClassName="navbar-links__ativo">
+                        Quem somos
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/contato">Contato</Link>
+                    <NavLink to="/contato" activeClassName="navbar-links__ativo">
+                        Contato
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to={props.usuario ? '/login' : '/home'} onClick={handleClick}>
+                    <NavLink 
+                        to="/login" 
+                        activeClassName="navbar-links__ativo"
+                        onClick={handleLoginOuSair}
+                    >
                         {props.usuario ? 'Sair' : 'Login'}
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
         </nav>
