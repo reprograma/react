@@ -3,12 +3,18 @@ import FaClose from 'react-icons/lib/fa/close'
 import './Postit.css'
 
 
+// const props = {
+//     id: "e8652ad9-e98d-49d7-a45f-6f9dc51838ad",
+//     titulo: "Estudar Javascript",
+//     texto: "Ler frontend handbook 2018"
+// }
+
 class Postit extends React.Component {
     state = {
-        id: null,
-        titulo: '',
-        texto: '',
-        editando: false
+        id: this.props.id ? this.props.id : null,
+        titulo: this.props.titulo ||  '',
+        texto: this.props.texto || '',
+        editando: this.props.editando || false
     }
 
     handleCampoChange = e => {
@@ -23,9 +29,7 @@ class Postit extends React.Component {
 
     handleFormularioSubmit = e => {
         e.preventDefault()
-
         
-
         if (this.state.id) {
             const postit = {
                 id: this.state.id,
