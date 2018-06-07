@@ -45,6 +45,12 @@
 
 @media (min-width: 992px) {
     .postit {
+        display: inline-flex;
         width: 30%;
+    }
+
+    .postit:nth-child(3n + 2) {
+        margin-left: 5%;
+        margin-right: 5%;
     }
 }

@@ -9,7 +9,7 @@ import './Postit.css'
 //     texto: "Ler frontend handbook 2018"
 // }
 
-class Postit extends React.Component {
+class Postit extends React.Component {    
     state = {
         id: this.props.id ? this.props.id : null,
         titulo: this.props.titulo ||  '',
@@ -37,16 +37,18 @@ class Postit extends React.Component {
                 texto: this.state.texto
             } 
 
-            // TODO: alterar postit na API
-            console.log('editando postit', postit)
+            this.props.onEditaClick(postit)
+
+            this.setState({
+                editando: false
+            })
         } else {
             const postit = {
                 titulo: this.state.titulo,
                 texto: this.state.texto
             } 
 
-            // TODO: cadastrar postit na API
-            console.log('cadastrando postit', postit)
+            this.props.onAdicionaClick(postit)
 
             this.setState({
                 titulo: '',
@@ -64,12 +66,9 @@ class Postit extends React.Component {
     handleBotaoRemoverClick = e => {
         e.stopPropagation()
 
-        // TODO: remover postit na API
-        const postit = {
-            id: this.state.id
-        }
+        const id = this.state.id;
 
-        console.log('removendo post-it', postit)
+        this.props.onRemoveClick(id)
 
         this.setState({
             editando: false
@@ -99,6 +98,7 @@ class Postit extends React.Component {
                     name="titulo"
                     value={this.state.titulo}
                     placeholder="Título..."
+                    autocomplete="off"
                     area-label="Título"
                     onChange={this.handleCampoChange}
                 />
@@ -108,6 +108,7 @@ class Postit extends React.Component {
                     value={this.state.texto}
                     placeholder="Digite o texto..."
                     area-label="Texto"
+                    autocomplete="off"
                     onChange={this.handleCampoChange}
                 />
 

@@ -1,20 +1,13 @@
 import React from 'react'
 import Postit from '../../componentes/Postit/Postit'
-import loading from './loading.gif'
+import loading from './loading.svg'
 import './Home.css'
-
-/*
-1. Fazer o Loading aparecer caso a lista vazia
-2. criar a lista no componentDidMount
-3. jogar a lista no state do componente
-4. for para adicionar os postits no else
-*/
-
 
 
 class Home extends React.Component {
     state = {
-        postits: []
+        postits: [],
+        carregando: true
     }
 
     componentDidMount() {
@@ -37,48 +30,50 @@ class Home extends React.Component {
             }
         ]
         
-        setInterval(() => {
+        setTimeout(() => {
             this.setState({
-                postits: postits
+                postits: postits,
+                carregando: false
             })
         }, 3000)
     }
 
-    adicionaPostit(postit) {
-        // this.state.postits.concat(postit)
+    adicionaPostit = (novoPostit) => {
+        // TODO: cadastrar postit na API
+
         this.setState(prevState => {
+            novoPostit.id = prevState.postits.length + 1
+
             return {
-                postits: this.state.postits.concat(postit)
+                postits: this.state.postits.concat(novoPostit)
             }
         })
     }
 
-    removePostit(id) {
+    editaPostit = (postitAlterado) => {
+        // TODO: alterar postit na API
+        
         this.setState(prevState => {
             return {
-                postits: prevState.postits.filter(
-                    postit => postit.id !== id
-                )
-            }
-        })
-    }
-
-    editaPostits(postitAlterado) {
-        this.setState(prevState => {
-            function mudaPostit(itemDoArray) {
-                if (itemDoArray.id === postitAlterado.id) {
-                    return {
-                        id: postitAlterado.id,
-                        titulo: postitAlterado.titulo,
-                        texto: postitAlterado.texto
+                postits: prevState.postits.map(postitAtual => {
+                    if (postitAtual.id === postitAlterado.id) {
+                        return postitAlterado
+                    } else {
+                        return postitAtual
                     }
-                } else {
-                    return itemDoArray
-                }
+                })
             }
+        })
+    }
 
+    removePostit = (id) => {
+        // TODO: remover postit na API
+
+        this.setState(prevState => {
             return {
-                postits: arrayNovo
+                postits: prevState.postits.filter(postitAtual => {
+                    return postitAtual.id !== id ? true : false
+                })
             }
         })
     }
@@ -86,12 +81,20 @@ class Home extends React.Component {
     render() {
         return (
             <div className="home">
-                <Postit />
+                <Postit
+                    onAdicionaClick={this.adicionaPostit}
+                    onEditaClick={this.editaPostit}
+                    onRemoveClick={this.removePostit}s
+                />
     
-                <div className="home__lista">
+                <div>
                 {
-                    this.state.postits.length === 0 ? (
-                        <img src={loading} alt="Carregando lista de postit" />
+                    this.state.carregando ? (
+                        <img 
+                            className="home__loading" 
+                            src={loading} 
+                            alt="Carregando lista de postit" 
+                        />
                     ) : (
                         this.state.postits.map(postit => (
                             <Postit 
@@ -99,6 +102,9 @@ class Home extends React.Component {
                                 id={postit.id}
                                 titulo={postit.titulo}
                                 texto={postit.texto}
+                                onAdicionaClick={this.adicionaPostit}
+                                onEditaClick={this.editaPostit}
+                                onRemoveClick={this.removePostit}
                             />
                         ))
                     )
