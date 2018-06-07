@@ -1,0 +1,50 @@
+.postit {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem;
+    margin: 0 0 1.5rem;
+    background: #ECDDF3;
+    border-radius: 2px;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14);
+}
+
+.postit__titulo {
+    font-weight: bold;
+}
+
+.postit__botao-remover {
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.postit__botao-concluir {
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-left: auto;
+}
+
+.postit__titulo,
+.postit__texto,
+.postit__botao-remover,
+.postit__botao-concluir {
+    pointer-events: auto;
+    font-size: inherit;
+    padding: 0.5rem;
+    border: none;
+    background: inherit;
+}
+
+.postit__titulo:focus,
+.postit__texto:focus,
+.postit__botao-concluir:focus {
+    outline: none;
+}
+
+@media (min-width: 992px) {
+    .postit {
+        width: 30%;
+    }
+}
