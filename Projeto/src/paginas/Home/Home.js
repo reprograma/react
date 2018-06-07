@@ -65,20 +65,26 @@ class Home extends React.Component {
 
     editaPostits(postitAlterado) {
         this.setState(prevState => {
-            return {
-                postits: prevState.postits.map(
-                    postitAtual => {
-                        if (postitAtual.id === postitAlterado.id) {
-                            return {
-                                id: postitAlterado.id,
-                                titulo: postitAlterado.titulo,
-                                texto: postitAlterado.texto
-                            }
-                        } else {
-                            return postitAtual
-                        }
+            function mudaPostit(postitAtual) {
+                if (postitAtual.id === postitAlterado.id) {
+                    return {
+                        id: postitAlterado.id,
+                        titulo: postitAlterado.titulo,
+                        texto: postitAlterado.texto
                     }
-                )
+                } else {
+                    return postitAtual
+                }
+            }
+
+            const arrayAnterior = prevState.postits
+            const arrayNovo = prevState.postits.map(mudaPostit)
+
+            console.log('arrayAnterior', arrayAnterior)
+            console.log('arrayNovo', arrayNovo)
+
+            return {
+                postits: arrayNovo
             }
         })
     }
