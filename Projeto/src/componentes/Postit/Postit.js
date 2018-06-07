@@ -24,18 +24,31 @@ class Postit extends React.Component {
     handleFormularioSubmit = e => {
         e.preventDefault()
 
-        // TODO: cadastrar postit na API
-        const postit = {
-            titulo: this.state.titulo,
-            texto: this.state.texto
+        
+
+        if (this.state.id) {
+            const postit = {
+                id: this.state.id,
+                titulo: this.state.titulo,
+                texto: this.state.texto
+            } 
+
+            // TODO: alterar postit na API
+            console.log('editando postit', postit)
+        } else {
+            const postit = {
+                titulo: this.state.titulo,
+                texto: this.state.texto
+            } 
+
+            // TODO: cadastrar postit na API
+            console.log('cadastrando postit', postit)
+
+            this.setState({
+                titulo: '',
+                texto: ''
+            })
         }
-
-        console.log('cadastrando postit', postit)
-
-        this.setState({
-            titulo: '',
-            texto: ''
-        })
     }
 
     handleFormularioClick = e => {
@@ -53,6 +66,10 @@ class Postit extends React.Component {
         }
 
         console.log('removendo post-it', postit)
+
+        this.setState({
+            editando: false
+        })
     }
 
     render() {
@@ -62,7 +79,7 @@ class Postit extends React.Component {
                 onClick={this.handleFormularioClick}
                 onSubmit={this.handleFormularioSubmit}
             >
-                {this.state.editando && (
+                {this.state.id && this.state.editando && (
                 <button 
                     className="postit__botao-remover"
                     type="button"
@@ -89,9 +106,12 @@ class Postit extends React.Component {
                     area-label="Texto"
                     onChange={this.handleCampoChange}
                 />
+
+                {(!this.state.id || this.state.editando) && (
                 <button className="postit__botao-concluir">
                     Concluído
                 </button>
+                )}
             </form>
         )
     }
