@@ -3,6 +3,14 @@ import Postit from '../../componentes/Postit/Postit'
 import loading from './loading.gif'
 import './Home.css'
 
+/*
+1. Fazer o Loading aparecer caso a lista vazia
+2. criar a lista no componentDidMount
+3. jogar a lista no state do componente
+4. for para adicionar os postits no else
+*/
+
+
 
 class Home extends React.Component {
     state = {
@@ -36,25 +44,66 @@ class Home extends React.Component {
         }, 3000)
     }
 
+    adicionaPostit(postit) {
+        // this.state.postits.concat(postit)
+        this.setState(prevState => {
+            return {
+                postits: this.state.postits.concat(postit)
+            }
+        })
+    }
+
+    removePostit(id) {
+        this.setState(prevState => {
+            return {
+                postits: prevState.postits.filter(
+                    postit => postit.id !== id
+                )
+            }
+        })
+    }
+
+    editaPostits(postitAlterado) {
+        this.setState(prevState => {
+            return {
+                postits: prevState.postits.map(
+                    postitAtual => {
+                        if (postitAtual.id === postitAlterado.id) {
+                            return {
+                                id: postitAlterado.id,
+                                titulo: postitAlterado.titulo,
+                                texto: postitAlterado.texto
+                            }
+                        } else {
+                            return postitAtual
+                        }
+                    }
+                )
+            }
+        })
+    }
+
     render() {
         return (
             <div className="home">
-                <h1>Home</h1>
-    
                 <Postit />
     
-                {this.state.postits.length === 0 ? (
-                    <img src={loading} alt="Carregando lista de postit" />
-                ) : (
-                    this.state.postits.map(postit => (
-                        <Postit 
-                            key={postit.id}
-                            id={postit.id}
-                            titulo={postit.titulo}
-                            texto={postit.texto}
-                        />
-                    ))
-                )}
+                <div className="home__lista">
+                {
+                    this.state.postits.length === 0 ? (
+                        <img src={loading} alt="Carregando lista de postit" />
+                    ) : (
+                        this.state.postits.map(postit => (
+                            <Postit 
+                                key={postit.id}
+                                id={postit.id}
+                                titulo={postit.titulo}
+                                texto={postit.texto}
+                            />
+                        ))
+                    )
+                }
+                </div>
             </div>
         )
     }
