@@ -3,14 +3,6 @@ import Postit from '../../componentes/Postit/Postit'
 import loading from './loading.gif'
 import './Home.css'
 
-/*
-1. Fazer o Loading aparecer caso a lista vazia
-2. criar a lista no componentDidMount
-3. jogar a lista no state do componente
-4. for para adicionar os postits no else
-*/
-
-
 
 class Home extends React.Component {
     state = {
@@ -67,18 +59,14 @@ class Home extends React.Component {
         this.setState(prevState => {
             function mudaPostit(itemDoArray) {
                 if (itemDoArray.id === postitAlterado.id) {
-                    return {
-                        id: postitAlterado.id,
-                        titulo: postitAlterado.titulo,
-                        texto: postitAlterado.texto
-                    }
+                    return postitAlterado
                 } else {
                     return itemDoArray
                 }
             }
 
             return {
-                postits: arrayNovo
+                postits: prevState.postits.map(mudaPostit)
             }
         })
     }
