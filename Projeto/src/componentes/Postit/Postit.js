@@ -6,7 +6,14 @@ import './Postit.css'
 // const props = {
 //     id: "e8652ad9-e98d-49d7-a45f-6f9dc51838ad",
 //     titulo: "Estudar Javascript",
-//     texto: "Ler frontend handbook 2018"
+//     texto: "Ler frontend handbook 2018",
+//     onAdicionPostitClick: () => {}
+// }
+
+// const props = {
+//     onAdicionaPostitClick: () => {},
+//     onEditaPostitClick: () => {},
+//     onRemovePostitClick: () => {}
 // }
 
 class Postit extends React.Component {
@@ -31,26 +38,29 @@ class Postit extends React.Component {
         e.preventDefault()
         
         if (this.state.id) {
-            const postit = {
+            const postitEditado = {
                 id: this.state.id,
                 titulo: this.state.titulo,
                 texto: this.state.texto
             } 
 
             // TODO: alterar postit na API
-            console.log('editando postit', postit)
+            this.props.onEditaPostitClick(postitEditado)
+
+            this.setState({ editando: false })
         } else {
-            const postit = {
+            const novoPostit = {
                 titulo: this.state.titulo,
                 texto: this.state.texto
             } 
 
             // TODO: cadastrar postit na API
-            console.log('cadastrando postit', postit)
+            this.props.onAdicionaPostitClick(novoPostit)
 
             this.setState({
                 titulo: '',
-                texto: ''
+                texto: '',
+                editando: false
             })
         }
     }
@@ -65,11 +75,9 @@ class Postit extends React.Component {
         e.stopPropagation()
 
         // TODO: remover postit na API
-        const postit = {
-            id: this.state.id
-        }
+        const id = this.state.id
 
-        console.log('removendo post-it', postit)
+        this.props.onRemovePostitClick(id)
 
         this.setState({
             editando: false
