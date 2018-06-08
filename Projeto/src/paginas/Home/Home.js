@@ -1,6 +1,7 @@
 import React from 'react'
 import Postit from '../../componentes/Postit/Postit'
-import loading from './loading.gif'
+import loading from './loading.svg'
+import * as apiPostit from '../../apis/postits'
 import './Home.css'
 
 
@@ -11,67 +12,80 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // TODO: buscar lista de postit
-        const postits = [
-            {
-                id: "c2f27308-75c6-440b-bbf9-1a075c32200f",
-                titulo: "Estuda HTML",
-                texto: "Lorem Ipsum"
-            },
-            {
-                id: "4627781c-bd04-41d5-8c97-3819d2a38fc1",
-                titulo: "Estuda CSS",
-                texto: "Lorem Ipsum"
-            },
-            {
-                id: "04b9dd92-71a6-46bc-9e63-df5112d3fa71",
-                titulo: "Estuda JS",
-                texto: "Lorem Ipsum"
-            }
-        ]
-        
-        setTimeout(() => {
-            this.setState({
-                postits: postits,
-                carregando: false
+        apiPostit.getPostits()
+            .then(response => {
+                this.setState({
+                    postits: response.data.postits,
+                    carregando: false
+                })
             })
-        }, 3000)
+            .catch(error => {
+                if (error.response) {
+                    alert(error.response.data.erro)
+                }
+            })
     }
 
     adicionaPostit = (novoPostit) => {
-        this.setState(prevState => {
-            novoPostit.id = this.state.postits + 1
-
-            return {
-                postits: this.state.postits.concat(novoPostit)
-            }
-        })
-    }
-
-    removePostit = (id) => {
-        this.setState(prevState => {
-            return {
-                postits: prevState.postits.filter(
-                    postit => postit.id !== id
-                )
-            }
-        })
+        apiPostit.postPostit(novoPostit)
+            .then(response => {
+                this.setState(prevState => {
+                    novoPostit.id = response.data.id
+        
+                    return {
+                        postits: prevState.postits.concat(novoPostit)
+                    }
+                })
+            })
+            .catch(error => {
+                if (error.response) {
+                    alert(error.response.data.erro)
+                }
+            })
     }
 
     editaPostits = (postitAlterado) => {
-        this.setState(prevState => {
-            function mudaPostit(itemDoArray) {
-                if (itemDoArray.id === postitAlterado.id) {
-                    return postitAlterado
-                } else {
-                    return itemDoArray
-                }
-            }
+        apiPostit.putPostit(postitAlterado)
+            .then(response => {
+                this.setState(prevState => {
+                    return {
+                        postits: prevState.postits.map(
+                            (postitAtual) => {
+                                if (postitAtual.id === postitAlterado.id) {
+                                    return postitAlterado
+                                } else {
+                                    return postitAtual
+                                }
+                            }
+                        )
+                    }
+                })
+                .catch(error => {
+                    if (error.response) {
+                        alert(error.response.data.erro)
+                    }
+                })
 
-            return {
-                postits: prevState.postits.map(mudaPostit)
-            }
-        })
+            })
+    }
+
+
+    removePostit = (idPostitRemovido) => {
+        apiPostit.deletePostit(idPostitRemovido)
+            .then(response => {
+                this.setState(prevState => {
+                    return {
+                        postits: prevState.postits.filter(
+                            postit => postit.id !== idPostitRemovido
+                        )
+                    }
+                })
+            })
+            .catch(error => {
+                if (error.response) {
+                    alert(error.response.data.erro)
+                }
+            })
     }
 
     render() {
@@ -83,10 +97,14 @@ class Home extends React.Component {
                     onRemovePostitClick={this.removePostit}
                 />
     
-                <div className="home__lista">
+                <div>
                 {
                     this.state.carregando ? (
-                        <img src={loading} alt="Carregando lista de postit" />
+                        <img 
+                            className="home__loading" 
+                            src={loading} 
+                            alt="Carregando lista de postit" 
+                        />
                     ) : (
                         this.state.postits.map(postit => (
                             <Postit 

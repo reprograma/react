@@ -9,7 +9,7 @@ import './Postit.css'
 //     texto: "Ler frontend handbook 2018",
 //     onAdicionPostitClick: () => {}
 // }
-
+// ou
 // const props = {
 //     onAdicionaPostitClick: () => {},
 //     onEditaPostitClick: () => {},
@@ -25,7 +25,7 @@ class Postit extends React.Component {
     }
 
     handleCampoChange = e => {
-        // name="titulo" ou name="texto"
+        // <... name="titulo" ou name="texto" />
         const nomeDoCampo = e.target.name
         const valorDoCampo = e.target.value
 
@@ -44,7 +44,6 @@ class Postit extends React.Component {
                 texto: this.state.texto
             } 
 
-            // TODO: alterar postit na API
             this.props.onEditaPostitClick(postitEditado)
 
             this.setState({ editando: false })
@@ -54,7 +53,6 @@ class Postit extends React.Component {
                 texto: this.state.texto
             } 
 
-            // TODO: cadastrar postit na API
             this.props.onAdicionaPostitClick(novoPostit)
 
             this.setState({
@@ -74,7 +72,6 @@ class Postit extends React.Component {
     handleBotaoRemoverClick = e => {
         e.stopPropagation()
 
-        // TODO: remover postit na API
         const id = this.state.id
 
         this.props.onRemovePostitClick(id)

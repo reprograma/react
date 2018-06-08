@@ -6,15 +6,13 @@
     background-size: cover;
 }
 
-.home__lista {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    justify-content: space-between;
+.home__loading {
+    display: block;
+    margin: 0 auto;
 }
 
 @media (min-width: 992px) {
     .home {
-        padding: 3rem 10% 0;
+        padding: 1.5rem 10% 0;
     }
 }

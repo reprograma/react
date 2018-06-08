@@ -43,14 +43,15 @@ class Login extends React.Component {
         if (!estaDesabilitado) {
             apiLogin.postUsuario(usuario)
                 .then(response => {
-                    const usuarioRespondido = response.data.usuario
-                    localStorage.setItem('usuario', JSON.stringify(usuarioRespondido))
+                    localStorage.setItem('usuario', JSON.stringify(response.data.usuario))
 
                     this.props.onEnviarClick()
                     this.props.historico.push('/')
                 })
                 .catch(error => {
-                    alert(error.response.data.erro)
+                    if (error.response) {
+                        alert(error.response.data.erro)
+                    }
                 })
         }
         
@@ -91,6 +92,7 @@ class Login extends React.Component {
                             name="email" 
                             type="email" 
                             placeholder="Email"
+                            autoComplete="email"
                             required={true}
                             onChange={this.handleChange} 
                         />
@@ -105,6 +107,7 @@ class Login extends React.Component {
                             name="senha" 
                             type="password" 
                             placeholder="Senha"
+                            autoComplete="current-password"
                             minLength={6}
                             required={true}
                             onChange={this.handleChange} 

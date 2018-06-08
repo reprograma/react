@@ -9,20 +9,13 @@ import NaoEncontrada from './paginas/NaoEncontrada/NaoEncontrada'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css'
 
-/* 
-<Route exact path="/" render={props => {
-  if (this.state.usuario) {
-    return <Home />
-  } else {
-    return <Redirect to="/login" />
-  }
-}} />
-*/
 class App extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { usuario: false }
+    this.state = { 
+      usuario: JSON.parse(localStorage.getItem('usuario'))
+    }
 
     this.logaUsuario = this.logaUsuario.bind(this)
     this.deslogaUsuario = this.deslogaUsuario.bind(this)
@@ -33,6 +26,7 @@ class App extends React.Component {
   }
 
   deslogaUsuario() {
+    localStorage.removeItem('usuario')
     this.setState({ usuario: false })
   }
 

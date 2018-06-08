@@ -39,6 +39,7 @@ function CaixaTexto(props) {
             type={props.type}
             name={props.name}
             placeholder={props.placeholder}
+            autoComplete={props.autoComplete}
             onChange={valida}
         />
     )
