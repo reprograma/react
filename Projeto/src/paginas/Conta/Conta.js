@@ -92,6 +92,7 @@ class Conta extends React.Component {
                             name="nome" 
                             type="text" 
                             placeholder="Nome"
+                            autoComplete="name"
                             required={true}
                             minLength={10}
                             onChange={this.handleChange} 
@@ -107,6 +108,7 @@ class Conta extends React.Component {
                             name="telefone" 
                             type="text" 
                             placeholder="Telefone"
+                            autoComplete="tel-national"
                             required={true}
                             onChange={this.handleChange} 
                         />
@@ -121,6 +123,7 @@ class Conta extends React.Component {
                             name="email" 
                             type="email" 
                             placeholder="Email"
+                            autoComplete="email"
                             required={true}
                             onChange={this.handleChange} 
                         />
@@ -135,6 +138,7 @@ class Conta extends React.Component {
                             name="senha" 
                             type="password" 
                             placeholder="Senha"
+                            autoComplete="off"
                             minLength={6}
                             required={true}
                             onChange={this.handleChange} 
