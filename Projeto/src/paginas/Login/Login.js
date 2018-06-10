@@ -3,7 +3,6 @@ import Formulario from '../../componentes/Formulario/Formulario'
 import Grupo from '../../componentes/Formulario/Grupo/Grupo'
 import Botao from '../../componentes/Formulario/Botao/Botao'
 import Link from '../../componentes/Formulario/Link/Link'
-import * as apiLogin from '../../apis/usuarios'
 import './Login.css'
 
 
@@ -33,26 +32,15 @@ class Login extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        const usuario = {
-            email: this.state.email.valor,
-            senha: this.state.senha.valor
-        }
-
         const estaDesabilitado = this.estaDesabilitado()
 
         if (!estaDesabilitado) {
-            apiLogin.postUsuario(usuario)
-                .then(response => {
-                    localStorage.setItem('usuario', JSON.stringify(response.data.usuario))
+            const usuario = {
+                email: this.state.email.valor,
+                senha: this.state.senha.valor
+            }
 
-                    this.props.onEnviarClick()
-                    this.props.historico.push('/')
-                })
-                .catch(error => {
-                    if (error.response) {
-                        alert(error.response.data.erro)
-                    }
-                })
+            this.props.onEnviarClick(usuario)
         }
         
     }
