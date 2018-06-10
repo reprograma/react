@@ -1,94 +1,45 @@
 import React from 'react'
+import { Redirect }  from 'react-router-dom'
 import Postit from '../../componentes/Postit/Postit'
 import loading from './loading.svg'
-import * as apiPostit from '../../apis/postits'
 import './Home.css'
 
 
 class Home extends React.Component {
     state = {
-        postits: [],
         carregando: true
     }
 
     componentDidMount() {
-        apiPostit.getPostits()
-            .then(response => {
-                this.setState({
-                    postits: response.data.postits,
-                    carregando: false
-                })
-            })
-            .catch(error => {
-                if (error.response) {
-                    alert(error.response.data.erro)
-                }
-            })
+        console.log('componentDidMount props', this.props)
+        this.props.onListaPostits()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps nextProps', nextProps)
+
+        this.setState({
+            carregando: false
+        })
     }
 
     adicionaPostit = (novoPostit) => {
-        apiPostit.postPostit(novoPostit)
-            .then(response => {
-                this.setState(prevState => {
-                    novoPostit.id = response.data.id
-        
-                    return {
-                        postits: prevState.postits.concat(novoPostit)
-                    }
-                })
-            })
-            .catch(error => {
-                if (error.response) {
-                    alert(error.response.data.erro)
-                }
-            })
+        this.props.onAdicionaPostit(novoPostit)
     }
 
-    editaPostits = (postitAlterado) => {
-        apiPostit.putPostit(postitAlterado)
-            .then(response => {
-                this.setState(prevState => {
-                    return {
-                        postits: prevState.postits.map(
-                            (postitAtual) => {
-                                if (postitAtual.id === postitAlterado.id) {
-                                    return postitAlterado
-                                } else {
-                                    return postitAtual
-                                }
-                            }
-                        )
-                    }
-                })
-                .catch(error => {
-                    if (error.response) {
-                        alert(error.response.data.erro)
-                    }
-                })
-
-            })
+    editaPostits = (postitEditado) => {
+        this.props.onEditaPotit(postitEditado)
     }
-
 
     removePostit = (idPostitRemovido) => {
-        apiPostit.deletePostit(idPostitRemovido)
-            .then(response => {
-                this.setState(prevState => {
-                    return {
-                        postits: prevState.postits.filter(
-                            postit => postit.id !== idPostitRemovido
-                        )
-                    }
-                })
-            })
-            .catch(error => {
-                if (error.response) {
-                    alert(error.response.data.erro)
-                }
-            })
+        this.props.onRemovePostit(idPostitRemovido)
     }
 
     render() {
+        if (!this.props.usuario) {
+            return <Redirect to="/login" />
+        }
+
         return (
             <div className="home">
                 <Postit
@@ -106,7 +57,7 @@ class Home extends React.Component {
                             alt="Carregando lista de postit" 
                         />
                     ) : (
-                        this.state.postits.map(postit => (
+                        this.props.postits.map(postit => (
                             <Postit 
                                 key={postit.id}
                                 id={postit.id}
