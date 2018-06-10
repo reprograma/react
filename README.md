@@ -5,4 +5,4 @@ Este repositório tem o material para as aulas de React:
 - Projeto
 - Resumos
 - Links úteis
-- Vídeoaula de Redux
+- Videoaula de Redux
