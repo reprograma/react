@@ -1,2 +1,8 @@
-# react
-Este repositório tem exercícios para as aulas de React
+# React
+Este repositório tem o material para as aulas de React:
+
+- Exercícios
+- Projeto
+- Resumos
+- Links úteis
+- Vídeoaula de Redux
