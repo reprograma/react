@@ -49,9 +49,9 @@ class Menu extends React.Component {
 
         return (
             <nav className="navbar-menu">
-                <a className={classesDoBotao} onClick={this.handleAbreOuFecha}>
+                <button className={classesDoBotao} onClick={this.handleAbreOuFecha}>
                     Menu
-                </a>
+                </button>
 
                 <ul className={classesDasOpcoes}>
                     <li>
